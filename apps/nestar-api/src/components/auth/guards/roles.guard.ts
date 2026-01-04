@@ -34,6 +34,5 @@ export class RolesGuard implements CanActivate {
 		}
 
 		// description => http, rpc, gprs and etc are ignored
-		return true;
 	}
 }
