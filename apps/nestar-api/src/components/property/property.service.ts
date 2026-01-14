@@ -164,7 +164,7 @@ export class PropertyService {
 		if (typeList && typeList.length) match.propertyType = { $in: typeList };
 
 		if (pricesRange) match.propertyPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
-		if (periodsRange) match.createdAt = { $gte: periodsRange.start, $lte: periodsRange.end };
+		if (periodsRange) match.createdAt = { $gte: new Date(periodsRange.start), $lte: new Date(periodsRange.end) };
 		if (squaresRange) match.propertySquare = { $gte: squaresRange.start, $lte: squaresRange.end };
 
 		if (text) match.propertyTitle = { $regex: new RegExp(text, 'i') };
@@ -271,7 +271,7 @@ export class PropertyService {
 	}
 
 	public async removePropertyByAdmin(propertyId: ObjectId): Promise<Property> {
-		const search: T = { _id: propertyId, propertyStatus: PropertyStatus.DELETE }; 
+		const search: T = { _id: propertyId, propertyStatus: PropertyStatus.DELETE };
 		const result = await this.propertyModel.findOneAndDelete(search).exec();
 		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 
