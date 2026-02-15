@@ -99,8 +99,8 @@ export class PropertyService {
 		console.log('Input ID:', input._id.toString());
 		console.log('Auth memberId:', memberId.toString());
 
-		if (propertyStatus === PropertyStatus.SOLD) soldAt = moment().toDate();
-		else if (propertyStatus === PropertyStatus.DELETE) deletedAt = moment().toDate();
+		if (propertyStatus === PropertyStatus.SOLD) soldAt = new Date();
+		else if (propertyStatus === PropertyStatus.DELETE) deletedAt = new Date();
 
 		const result = await this.propertyModel
 			.findOneAndUpdate(search, input, {
@@ -283,8 +283,8 @@ export class PropertyService {
 			propertyStatus: PropertyStatus.ACTIVE,
 		};
 
-		if (propertyStatus === PropertyStatus.SOLD) soldAt = moment().toDate();
-		else if (propertyStatus === PropertyStatus.DELETE) deletedAt = moment().toDate();
+		if (propertyStatus === PropertyStatus.SOLD) soldAt = new Date();
+		else if (propertyStatus === PropertyStatus.DELETE) deletedAt = new Date();
 
 		const result = await this.propertyModel
 			.findOneAndUpdate(search, input, {
